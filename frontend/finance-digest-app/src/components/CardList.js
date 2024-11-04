@@ -1,6 +1,7 @@
 import React from 'react';
 import { urlFor } from '../client';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
 const useStyles = makeStyles(() => ({
   card: {
     display: 'flex',
@@ -12,6 +13,7 @@ const useStyles = makeStyles(() => ({
   imageContainer: {
     flex: '1 0 150px',
     marginRight: '16px',
+    cursor: 'pointer',
   },
   image: {
     width: '75%',
@@ -36,12 +38,16 @@ const useStyles = makeStyles(() => ({
     margin: '0',
   },
   }));
-const CardList = ({ image, title, date,description }) => {
+const CardList = ({ image, title, date,description,types,routePath }) => {
     const classes = useStyles();
+    const navigate = useNavigate();
+    const handleClick = () => {
+      navigate(`description/${types}/${routePath.current}`);
+    };
   return (
     <div className={classes.root}>
     <div className={classes.card}>
-      <div className={classes.imageContainer}>
+      <div  onClick={handleClick} className={classes.imageContainer}>
         <img src={urlFor(image)} alt={title} className={classes.image} />
       </div>
       <div className={classes.content}>

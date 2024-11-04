@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import sanityClient from "../client";
 import CardList from "../components/CardList";
 import { daysAgo } from "../utils";
+import ExpendComponent from "../components/ExpendComponent";
 const useStyles = makeStyles(() => ({
   cardList: {
    display: 'flex',
@@ -40,14 +41,16 @@ const Business = () => {
     .then((fetchedData) => setCategories(fetchedData))
     .catch(console.error);
   }, []);
-  console.log(categories)
   return (
     <div className={classes.root}>
+    <ExpendComponent/>
       <div className={classes.cardList}>
       {categories.map((category, index) => (
       <CardList
       image={category.image}
       title={category.title}
+      routePath={category.slug}
+      types={category.types}
       date={daysAgo(category.launchAt,category.types) }
       description={category.title} 
       key={index}

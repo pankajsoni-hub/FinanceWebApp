@@ -11,6 +11,7 @@ import Business from "./views/Business";
 import Finance from "./views/Finance";
 import LifeStyle from "./views/LifeStyle";
 import News from "./views/News";
+import CommonPage from "./views/CommonPage";
 
 function App() {
 	return (
@@ -25,7 +26,8 @@ function App() {
 					<Route path="/finance" element={<Finance/>}/>
 					<Route path="/lifestyle" element={<LifeStyle/>}/>
 					<Route path="/news" element={<News/>}/>
-					{/* <Route component={FilteredFoods} path="/FilteredFoods/:slug" /> */}
+					<Route element={<CommonPage/>} path=":type/description/:type/:slug" />
+					<Route element={<CommonPage/>} path="/description/:type/:slug" />
 				</Routes>
 			</main>
 			<div className="max-w-full">

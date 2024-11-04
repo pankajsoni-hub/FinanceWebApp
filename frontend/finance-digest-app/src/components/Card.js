@@ -3,6 +3,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Card, CardContent } from '@mui/material';
 import { urlFor } from '../client';
+import { useNavigate } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 250,
@@ -25,11 +26,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardComponent = ({ image, date, description,title }) => {
+const CardComponent = ({ image, date, description,title,routePath,types }) => {
   const classes = useStyles();
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`description/${types}/${routePath.current}`);
+  };
   return (
-    <Card className={classes.card}>
+    
+    <Card  className={classes.card}>
+    <div onClick={handleClick} style={{ cursor: 'pointer'}}>
      <img
 				src={urlFor(image).url()}
 				alt={title}
@@ -41,7 +47,9 @@ const CardComponent = ({ image, date, description,title }) => {
           {description}
         </h1>
       </CardContent>
+      </div>
     </Card>
+  
   );
 };
 

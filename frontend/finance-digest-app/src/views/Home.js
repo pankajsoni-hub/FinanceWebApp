@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Card from "../components/Card";
 import { makeStyles } from '@mui/styles';
 import sanityClient from "../client";
-import { Paper } from "@mui/material";
 import Heading from "../components/Heading";
 import { daysAgo } from "../utils";
+import ExpandComponent from "../components/ExpendComponent";
 
 const useStyles = makeStyles((theme) => ({
   titleContainer: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const [categories, setCategories] = useState([]);
-
+  
   useEffect(() => {
     sanityClient
     .fetch(
@@ -59,9 +59,9 @@ const Home = () => {
       .then((fetchedData) => setCategories(fetchedData))
       .catch(console.error);
   }, []);
-  console.log(categories)
   return (
     <div className={classes.root}>
+    <ExpandComponent/>
       <Heading title={"Latest News"}/>
       <div className={classes.cardContainer}>
       {categories
@@ -69,6 +69,8 @@ const Home = () => {
   .map((category, index) => (
     <Card
       image={category.image}
+      routePath={category.slug}
+      types={category.types}
       date={daysAgo(category.launchAt,category.types)}
       description={category.title} 
       key={index}
@@ -82,6 +84,8 @@ const Home = () => {
   .map((category, index) => (
     <Card
       image={category.image}
+      routePath={category.slug}
+      types={category.types}
       date={daysAgo(category.launchAt,category.types)}
       description={category.title} 
       key={index}
@@ -95,19 +99,23 @@ const Home = () => {
   .map((category, index) => (
     <Card
       image={category.image}
+      routePath={category.slug}
+      types={category.types}
       date={daysAgo(category.launchAt,category.types)}
       description={category.title} 
       key={index}
     />
   ))}
       </div>
-      <Heading title={"LifeStyle"}/>
+      <Heading title={"News"}/>
       <div className={classes.cardContainer}>
       {categories
-  .filter(category => category.types === "lifestyle") 
+  .filter(category => category.types === "news") 
   .map((category, index) => (
     <Card
       image={category.image}
+      routePath={category.slug}
+      types={category.types}
       date={daysAgo(category.launchAt,category.types)}
       description={category.title} 
       key={index}

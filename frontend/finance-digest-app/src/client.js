@@ -9,7 +9,6 @@ const client = createClient({
   returnQuery:true,
 });
 const builder = imageUrlBuilder(client);
-console.log(builder.image(),"-----builder")
 export const urlFor = (source) => builder.image(source);
 
 export default client;
